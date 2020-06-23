@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-eloquent-morph-to-one` will be documented in this file
 
+## 1.0.0 - 2020-06-23
+
+- full release
+
 ## 0.0.2 - 2020-06-23
 
 **Fixed**
