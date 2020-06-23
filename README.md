@@ -1,8 +1,9 @@
 # Adds MorphToOne relation to Laravel eloquent
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-eloquent-morph-to-one.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-eloquent-morph-to-one/run-tests?label=tests)](https://github.com/fidum/laravel-eloquent-morph-to-one/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/fidum/laravel-eloquent-morph-to-one.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-eloquent-morph-to-one.svg?style=for-the-badge)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-eloquent-morph-to-one/run-tests?label=tests&style=for-the-badge)](https://github.com/fidum/laravel-eloquent-morph-to-one/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![Codecov](https://img.shields.io/codecov/c/github/fidum/laravel-eloquent-morph-to-one?logo=codecov&logoColor=white&style=for-the-badge)](https://codecov.io/gh/fidum/laravel-eloquent-morph-to-one)
+[![Twitter Follow](https://img.shields.io/twitter/follow/danmasonmp?label=Follow&logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp) 
 
 :mega: Shoutout to [Ankur Kumar](https://github.com/ankurk91) who wrote the original code for this relation in their package [Eloquent Relations](https://github.com/ankurk91/laravel-eloquent-relationships). I created this package as I needed to make a few tweaks to suit my needs. :raised_hands:
 
