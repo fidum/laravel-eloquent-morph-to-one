@@ -19,7 +19,7 @@ composer require fidum/laravel-eloquent-morph-to-one
 
 The `MorphToOne` relation is uses Laravel's [MorphToMany](https://laravel.com/docs/7.x/eloquent-relationships#many-to-many-polymorphic-relations) under the hood. However, the difference is that it returns **one** model instead of a `Collection` of models. 
 
-If there is no related model in the database it return `null` (`MorphToMany` returns empty `Collection` in this case).
+If there is no related model in the database it will return `null` where `MorphToMany` would return an empty `Collection`.
 
 Example:
 ```php
