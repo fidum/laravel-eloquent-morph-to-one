@@ -25,7 +25,7 @@ Example:
 ```php
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -46,7 +46,7 @@ class Image extends Model
 ```php
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Fidum\EloquentMorphToOne\HasMorphToOne;
 use Fidum\EloquentMorphToOne\MorphToOne;
