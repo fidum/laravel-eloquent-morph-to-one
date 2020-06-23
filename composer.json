@@ -1,0 +1,57 @@
+{
+    "name": "fidum/:package_name",
+    "description": ":package_description",
+    "keywords": [
+        "fidum",
+        "laravel",
+        ":package_name"
+    ],
+    "homepage": "https://github.com/fidum/:package_name",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": ":author_name",
+            "email": "fidum.dev@gmail.com",
+            "homepage": "https://danielmason.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^9.0",
+        "psalm/plugin-laravel": "^1.2",
+        "vimeo/psalm": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fidum\\Skeleton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fidum\\Skeleton\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fidum\\Skeleton\\SkeletonServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "Fidum\\Skeleton\\SkeletonFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,7 @@
+preset: laravel
+disabled:
+  - simplified_null_return
+
+finder:
+  exclude:
+    - "tests/fixtures"
