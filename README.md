@@ -1,10 +1,9 @@
-# :package_description
+# Adds MorphToOne relation to Laravel eloquent
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/:package_name.svg?style=flat-square)](https://packagist.org/packages/fidum/:package_name)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/:package_name/run-tests?label=tests)](https://github.com/fidum/:package_name/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/fidum/:package_name.svg?style=flat-square)](https://packagist.org/packages/fidum/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-eloquent-morph-to-one.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-eloquent-morph-to-one/run-tests?label=tests)](https://github.com/fidum/laravel-eloquent-morph-to-one/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/fidum/laravel-eloquent-morph-to-one.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
 
-**Note:** Replace ```:author_name``` ```:author_username``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can also run `configure-skeleton.sh` to do this automatically.
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -13,33 +12,74 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require fidum/package-skeleton-laravel
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Fidum\Skeleton\SkeletonServiceProvider" --tag="migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Fidum\Skeleton\SkeletonServiceProvider" --tag="config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+composer require fidum/laravel-eloquent-morph-to-one
 ```
 
 ## Usage
 
-``` php
-$skeleton = new Fidum\Skeleton();
-echo $skeleton->echoPhrase('Hello, Fidum!');
+`MorphToOne` relation is almost identical to standard [MorphToMany](https://laravel.com/docs/7.x/eloquent-relationships#many-to-many-polymorphic-relations) except it returns one model instead of `Collection` of models 
+and `null` if there is no related model in the database (`MorphToMany` returns empty `Collection` in this case). 
+Example:
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
+class Image extends Model
+{
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'imageable');
+    }
+
+    public function videos(): MorphToMany
+    {
+        return $this->morphedByMany(Video::class, 'imageable');
+    }
+}
+```
+```php
+<?php
+
+namespace App\Models;
+
+use Fidum\EloquentMorphToOne\HasMorphToOne;
+use Fidum\EloquentMorphToOne\MorphToOne;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
+class Post extends Model
+{
+    use HasMorphToOne;
+
+    public function featuredImage(): MorphToOne
+    {
+        return $this->morphToOne(Image::class, 'imageable')
+            ->wherePivot('featured', 1);
+            //->withDefault();
+    }
+    
+    public function images(): MorphToMany
+    {
+        return $this->morphToMany(Image::class, 'imageable')
+            ->withPivot('featured');
+    }
+
+}
+
+```
+Now you can access the relationship like:
+```php
+<?php
+
+// eager loading
+$post = Post::with('featuredImage')->first();
+dump($post->featuredImage);
+// lazy loading
+$post->load('featuredImage');
 ```
 
 ## Testing
@@ -62,7 +102,7 @@ If you discover any security related issues, please email fidum.dev@gmail.com in
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Daniel Mason](https://github.com/fidum)
 - [All Contributors](../../contributors)
 
 ## License

@@ -1,38 +1,39 @@
 {
-    "name": "fidum/:package_name",
-    "description": ":package_description",
+    "name": "fidum/laravel-eloquent-morph-to-one",
+    "description": "Adds MorphToOne relation to Laravel eloquent",
     "keywords": [
         "fidum",
         "laravel",
-        ":package_name"
+        "laravel-eloquent-morph-to-one"
     ],
-    "homepage": "https://github.com/fidum/:package_name",
+    "homepage": "https://github.com/fidum/laravel-eloquent-morph-to-one",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
+            "name": "Daniel Mason",
             "email": "fidum.dev@gmail.com",
             "homepage": "https://danielmason.co.uk",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": ">=7.2.5",
+        "illuminate/database": "^7.0",
+        "illuminate/support": "^7.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^5.0",
-        "phpunit/phpunit": "^9.0",
+        "phpunit/phpunit": "^8.0||^9.0",
         "psalm/plugin-laravel": "^1.2",
         "vimeo/psalm": "^3.11"
     },
     "autoload": {
         "psr-4": {
-            "Fidum\\Skeleton\\": "src"
+            "Fidum\\EloquentMorphToOne\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fidum\\Skeleton\\Tests\\": "tests"
+            "Fidum\\EloquentMorphToOne\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -45,10 +46,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fidum\\Skeleton\\SkeletonServiceProvider"
+                "Fidum\\EloquentMorphToOne\\SkeletonServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Fidum\\Skeleton\\SkeletonFacade"
+                "EloquentMorphToOne": "Fidum\\EloquentMorphToOne\\SkeletonFacade"
             }
         }
     },

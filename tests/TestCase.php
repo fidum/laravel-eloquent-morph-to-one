@@ -1,38 +1,64 @@
 <?php
 
-namespace Fidum\Skeleton\Tests;
+namespace Fidum\EloquentMorphToOne\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
-use Fidum\Skeleton\SkeletonServiceProvider;
+use PHPUnit\Framework\TestCase as BaseTestCase;
+use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Database\Schema\Blueprint;
 
-class TestCase extends Orchestra
+class TestCase extends BaseTestCase
 {
-    public function setUp(): void
+    public function setUp() : void
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__.'/database/factories');
+        $this->initDB();
+        $this->migrateDB();
     }
 
-    protected function getPackageProviders($app)
+    protected function initDB()
     {
-        return [
-            SkeletonServiceProvider::class,
-        ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
+        $db = new DB();
+        $db->addConnection([
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
         ]);
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+        $db->setAsGlobal();
+        $db->bootEloquent();
+    }
+
+    protected function migrateDB()
+    {
+        DB::schema()->create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+
+        DB::schema()->create('restaurants', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        DB::schema()->create('images', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        DB::schema()->create('imageables', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->unsignedInteger('image_id');
+            $table->foreign('image_id')->references('id')->on('imageable')->onDelete('cascade');
+
+            $table->unsignedInteger('imageable_id');
+            $table->string('imageable_type');
+            $table->boolean('is_featured')->default(0);
+            $table->timestamps();
+        });
     }
 }
