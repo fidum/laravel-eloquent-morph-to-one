@@ -2,13 +2,13 @@
 
 namespace Fidum\EloquentMorphToOne\Tests;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\Schema\Blueprint;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 

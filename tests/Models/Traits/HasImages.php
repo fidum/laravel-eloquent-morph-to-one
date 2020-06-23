@@ -2,9 +2,9 @@
 
 namespace Fidum\EloquentMorphToOne\Tests\Models\Traits;
 
+use Fidum\EloquentMorphToOne\HasMorphToOne;
 use Fidum\EloquentMorphToOne\MorphToOne;
 use Fidum\EloquentMorphToOne\Tests\Models\Image;
-use Fidum\EloquentMorphToOne\HasMorphToOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasImages

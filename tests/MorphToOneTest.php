@@ -3,12 +3,12 @@
 namespace Fidum\EloquentMorphToOne\Tests;
 
 use Fidum\EloquentMorphToOne\Tests\Models\Image;
-use Fidum\EloquentMorphToOne\Tests\Models\User;
 use Fidum\EloquentMorphToOne\Tests\Models\Restaurant;
+use Fidum\EloquentMorphToOne\Tests\Models\User;
 
 class MorphToOneTest extends TestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
