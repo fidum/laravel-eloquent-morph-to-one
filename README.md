@@ -1,7 +1,7 @@
 # Adds MorphToOne relation to Laravel eloquent
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-eloquent-morph-to-one.svg?style=for-the-badge)](https://packagist.org/packages/fidum/laravel-eloquent-morph-to-one)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-eloquent-morph-to-one/run-tests?label=tests&style=for-the-badge)](https://github.com/fidum/laravel-eloquent-morph-to-one/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-eloquent-morph-to-one/Tests?label=tests&style=for-the-badge)](https://github.com/fidum/laravel-eloquent-morph-to-one/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Codecov](https://img.shields.io/codecov/c/github/fidum/laravel-eloquent-morph-to-one?logo=codecov&logoColor=white&style=for-the-badge)](https://codecov.io/gh/fidum/laravel-eloquent-morph-to-one)
 [![Twitter Follow](https://img.shields.io/twitter/follow/danmasonmp?label=Follow&logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp) 
 
