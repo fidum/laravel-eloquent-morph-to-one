@@ -43,16 +43,6 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Fidum\\EloquentMorphToOne\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "EloquentMorphToOne": "Fidum\\EloquentMorphToOne\\SkeletonFacade"
-            }
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
