@@ -27,27 +27,6 @@ Example:
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-
-class Image extends Model
-{
-    public function posts(): MorphToMany
-    {
-        return $this->morphedByMany(Post::class, 'imageable');
-    }
-
-    public function videos(): MorphToMany
-    {
-        return $this->morphedByMany(Video::class, 'imageable');
-    }
-}
-```
-```php
-<?php
-
-namespace App;
-
 use Fidum\EloquentMorphToOne\HasMorphToOne;
 use Fidum\EloquentMorphToOne\MorphToOne;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +52,29 @@ class Post extends Model
 }
 
 ```
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
+class Image extends Model
+{
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'imageable');
+    }
+
+    public function videos(): MorphToMany
+    {
+        return $this->morphedByMany(Video::class, 'imageable');
+    }
+}
+```
+
 Now you can access the relationship like:
 ```php
 <?php
