@@ -17,34 +17,15 @@ composer require fidum/laravel-eloquent-morph-to-one
 
 ## Usage
 
-`MorphToOne` relation is almost identical to standard [MorphToMany](https://laravel.com/docs/7.x/eloquent-relationships#many-to-many-polymorphic-relations) except it returns one model instead of `Collection` of models 
-and `null` if there is no related model in the database (`MorphToMany` returns empty `Collection` in this case). 
+The `MorphToOne` relation is uses Laravel's [MorphToMany](https://laravel.com/docs/7.x/eloquent-relationships#many-to-many-polymorphic-relations) under the hood. However, the difference is that it returns **one** model instead of a `Collection` of models. 
+
+If there is no related model in the database it will return `null` where `MorphToMany` would return an empty `Collection`.
+
 Example:
 ```php
 <?php
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-
-class Image extends Model
-{
-    public function posts(): MorphToMany
-    {
-        return $this->morphedByMany(Post::class, 'imageable');
-    }
-
-    public function videos(): MorphToMany
-    {
-        return $this->morphedByMany(Video::class, 'imageable');
-    }
-}
-```
-```php
-<?php
-
-namespace App\Models;
+namespace App;
 
 use Fidum\EloquentMorphToOne\HasMorphToOne;
 use Fidum\EloquentMorphToOne\MorphToOne;
@@ -71,6 +52,29 @@ class Post extends Model
 }
 
 ```
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+
+class Image extends Model
+{
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'imageable');
+    }
+
+    public function videos(): MorphToMany
+    {
+        return $this->morphedByMany(Video::class, 'imageable');
+    }
+}
+```
+
 Now you can access the relationship like:
 ```php
 <?php
