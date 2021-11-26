@@ -24,9 +24,8 @@ class MorphToOne extends MorphToMany
     /**
      * Initialize the relation on a set of models.
      *
-     * @param  array $models
-     * @param  string $relation
-     *
+     * @param  array  $models
+     * @param  string  $relation
      * @return array
      */
     public function initRelation(array $models, $relation)
@@ -41,10 +40,9 @@ class MorphToOne extends MorphToMany
     /**
      * Match the eagerly loaded results to their parents.
      *
-     * @param  array $models
-     * @param Collection $results
-     * @param  string $relation
-     *
+     * @param  array  $models
+     * @param  Collection  $results
+     * @param  string  $relation
      * @return array
      */
     public function match(array $models, Collection $results, $relation)
@@ -69,8 +67,7 @@ class MorphToOne extends MorphToMany
     /**
      * Make a new related instance for the given model.
      *
-     * @param Model $parent
-     *
+     * @param  Model  $parent
      * @return Model
      */
     public function newRelatedInstanceFor(Model $parent)
