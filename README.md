@@ -85,6 +85,19 @@ dump($post->featuredImage);
 // lazy loading
 $post->load('featuredImage');
 ```
+Prefer using `sync` instead of `save` when updating your relation. 
+```php
+$post->featuredImage()->sync([FeaturedImage::find(123)]);
+$post->featuredImage()->sync([FeaturedImage::find(456)]);
+$post->images->count(); // 1 row :)
+```
+
+:x: DO NOT use `save` it will follow `morphToMany` behaviour and create a new row instead of updating an existing one.
+```php
+$post->featuredImage()->save(FeaturedImage::find(123));
+$post->featuredImage()->save(FeaturedImage::find(456));
+$post->images->count(); // 2 rows :(
+```
 
 ## Testing
 
