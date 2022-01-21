@@ -92,7 +92,7 @@ $post->featuredImage()->sync([Image::find(456)]);
 $post->images->count(); // 1 row :)
 ```
 
-:x: DO NOT use `save` it will follow `morphToMany` behaviour and create a new row instead of updating an existing one.
+:x: DO NOT use `save` it will follow `morphToMany` behaviour and create rather than update existing.
 ```php
 $post->featuredImage()->save(Image::find(123));
 $post->featuredImage()->save(Image::find(456));
