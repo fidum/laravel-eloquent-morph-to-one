@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-eloquent-morph-to-one` will be documented in this file
 
+## 2.2.0 - 2023-02-08
+
+### What's Changed
+
+- Add Laravel 10 Support by @dmason30 in https://github.com/fidum/laravel-eloquent-morph-to-one/pull/7
+- Drop PHP 7.3 &off  7.4 Support
+
+**Full Changelog**: https://github.com/fidum/laravel-eloquent-morph-to-one/compare/2.1.1...2.2.0
+
 ## 2.1.1 - 2022-01-21
 
 ## What's Changed
