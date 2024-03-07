@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-eloquent-morph-to-one` will be documented in this file
 
+## 2.3.0 - 2024-03-07
+
+### What's Changed
+
+* Support Laravel 11 by @dmason30 in https://github.com/fidum/laravel-eloquent-morph-to-one/pull/8
+
+**Full Changelog**: https://github.com/fidum/laravel-eloquent-morph-to-one/compare/2.2.0...2.3.0
+
 ## 2.2.0 - 2023-02-08
 
 ### What's Changed
