@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-eloquent-morph-to-one` will be documented in this file
 
+## 2.4.0 - 2024-03-13
+
+### What's Changed
+
+* Drop Laravel 8.x & 9.x support by @dmason30 in https://github.com/fidum/laravel-eloquent-morph-to-one/pull/9
+  * Drop PHP 8.0 & 8.1 support
+  * Upgrade to PHPUnit 11.x
+  
+
+**Full Changelog**: https://github.com/fidum/laravel-eloquent-morph-to-one/compare/2.3.0...2.4.0
+
 ## 2.3.0 - 2024-03-07
 
 ### What's Changed
