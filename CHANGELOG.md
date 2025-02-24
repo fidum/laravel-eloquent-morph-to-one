@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-eloquent-morph-to-one` will be documented in this file
 
+## 2.5.0 - 2025-02-24
+
+### What's Changed
+
+* Run tests on PHP 8.4 by @dmason30 in https://github.com/fidum/laravel-eloquent-morph-to-one/pull/10
+* Adds Laravel 12.x Support by @dmason30 in https://github.com/fidum/laravel-eloquent-morph-to-one/pull/11
+
+**Full Changelog**: https://github.com/fidum/laravel-eloquent-morph-to-one/compare/2.4.0...2.5.0
+
 ## 2.4.0 - 2024-03-13
 
 ### What's Changed
