@@ -6,7 +6,7 @@ parameters:
         - src
         - tests
 
-    level: 6
+    level: 7
 
     ignoreErrors:
         # MorphToOne intentionally returns a single model where the parent
@@ -24,3 +24,11 @@ parameters:
         -
             identifier: return.type
             path: src/HasMorphToOne.php
+
+        # Laravel's SupportsDefaultModels::getDefaultFor() is not generic
+        # and is declared as returning Model|null, but it builds the default
+        # model via our newRelatedInstanceFor(), which returns TRelatedModel.
+        -
+            identifier: return.type
+            message: '#getResults#'
+            path: src/MorphToOne.php
