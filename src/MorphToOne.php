@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Concerns\SupportsDefaultModels;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+/**
+ * @template TRelatedModel of Model
+ * @template TDeclaringModel of Model
+ *
+ * @extends MorphToMany<TRelatedModel, TDeclaringModel>
+ */
 class MorphToOne extends MorphToMany
 {
     use SupportsDefaultModels;
@@ -14,8 +20,9 @@ class MorphToOne extends MorphToMany
     /**
      * Get the results of the relationship.
      *
-     * @return mixed
+     * @return TRelatedModel|null
      */
+    #[\Override]
     public function getResults()
     {
         return $this->first() ?: $this->getDefaultFor($this->getRelated());
@@ -24,10 +31,11 @@ class MorphToOne extends MorphToMany
     /**
      * Initialize the relation on a set of models.
      *
-     * @param  array  $models
+     * @param  array<int, TDeclaringModel>  $models
      * @param  string  $relation
-     * @return array
+     * @return array<int, TDeclaringModel>
      */
+    #[\Override]
     public function initRelation(array $models, $relation)
     {
         foreach ($models as $model) {
@@ -40,11 +48,12 @@ class MorphToOne extends MorphToMany
     /**
      * Match the eagerly loaded results to their parents.
      *
-     * @param  array  $models
-     * @param  Collection  $results
+     * @param  array<int, TDeclaringModel>  $models
+     * @param  Collection<int, TRelatedModel>  $results
      * @param  string  $relation
-     * @return array
+     * @return array<int, TDeclaringModel>
      */
+    #[\Override]
     public function match(array $models, Collection $results, $relation)
     {
         $dictionary = $this->buildDictionary($results);
@@ -53,7 +62,9 @@ class MorphToOne extends MorphToMany
         // children back to their parent using the dictionary and the keys on the
         // the parent models. Then we will return the hydrated models back out.
         foreach ($models as $model) {
-            if (isset($dictionary[$key = $model->{$this->parentKey}])) {
+            $key = $this->getDictionaryKey($model->{$this->parentKey});
+
+            if ($key !== null && isset($dictionary[$key])) {
                 $value = $dictionary[$key];
                 $model->setRelation(
                     $relation, reset($value)
@@ -67,9 +78,9 @@ class MorphToOne extends MorphToMany
     /**
      * Make a new related instance for the given model.
      *
-     * @param  Model  $parent
-     * @return Model
+     * @return TRelatedModel
      */
+    #[\Override]
     public function newRelatedInstanceFor(Model $parent)
     {
         return $this->related->newInstance();

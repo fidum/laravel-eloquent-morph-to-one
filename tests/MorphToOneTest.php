@@ -8,15 +8,10 @@ use Fidum\EloquentMorphToOne\Tests\Models\User;
 
 class MorphToOneTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        /**
-         * @var Restaurant $restaurant
-         * @var User $user
-         * @var Image $image
-         */
         $restaurant = Restaurant::create(['name' => 'ABC Inc']);
         $user = User::create(['email' => 'user@example.com']);
         $image = Image::create(['name' => 'Image']);
@@ -31,43 +26,43 @@ class MorphToOneTest extends TestCase
         $imageTwo = Image::create(['name' => 'Another']);
         $restaurant->images()->attach($imageTwo);
 
-        $restaurantWithoutImage = Restaurant::create(['name' => 'XYZ Inc']);
+        Restaurant::create(['name' => 'XYZ Inc']);
     }
 
-    public function testEagerLoading()
+    public function test_eager_loading(): void
     {
-        $restaurant = Restaurant::with('featuredImage')->first();
+        $restaurant = Restaurant::with('featuredImage')->firstOrFail();
 
         $this->assertInstanceOf(Image::class, $restaurant->featuredImage);
-        $this->assertEquals(1, $restaurant->featuredImage->pivot->is_featured);
+        $this->assertEquals(1, $restaurant->featuredImage->pivot?->is_featured);
     }
 
-    public function testLazyLoading()
+    public function test_lazy_loading(): void
     {
-        $restaurant = Restaurant::find(1);
+        $restaurant = Restaurant::findOrFail(1);
 
         $this->assertInstanceOf(Image::class, $restaurant->featuredImage);
-        $this->assertEquals(1, $restaurant->featuredImage->pivot->is_featured);
+        $this->assertEquals(1, $restaurant->featuredImage->pivot?->is_featured);
     }
 
-    public function testWithDefault()
+    public function test_with_default(): void
     {
-        $restaurant = Restaurant::find(2);
+        $restaurant = Restaurant::findOrFail(2);
 
         $this->assertInstanceOf(Image::class, $restaurant->featuredImageWithDefault);
         $this->assertFalse($restaurant->featuredImageWithDefault->exists);
         $this->assertNull($restaurant->featuredImage);
     }
 
-    public function testReverseRelation()
+    public function test_reverse_relation(): void
     {
-        $image = Image::first();
+        $image = Image::firstOrFail();
 
         $this->assertInstanceOf(Restaurant::class, $image->restaurant);
         $this->assertInstanceOf(User::class, $image->user);
 
         // image two is not a featured image
-        $image = Image::find(2);
+        $image = Image::findOrFail(2);
         $this->assertNull($image->restaurant);
     }
 }

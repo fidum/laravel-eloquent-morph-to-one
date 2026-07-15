@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -16,9 +16,9 @@ class TestCase extends BaseTestCase
         $this->migrateDB();
     }
 
-    protected function initDB()
+    protected function initDB(): void
     {
-        $db = new DB();
+        $db = new DB;
         $db->addConnection([
             'driver' => 'sqlite',
             'database' => ':memory:',
@@ -29,7 +29,7 @@ class TestCase extends BaseTestCase
         $db->bootEloquent();
     }
 
-    protected function migrateDB()
+    protected function migrateDB(): void
     {
         DB::schema()->create('users', function (Blueprint $table) {
             $table->increments('id');

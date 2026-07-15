@@ -11,15 +11,17 @@ trait HasMorphToOne
     /**
      * Define a one-to-one via pivot relationship.
      *
-     * @param  string  $related
+     * @template TRelatedModel of Model
+     *
+     * @param  class-string<TRelatedModel>  $related
      * @param  string  $name
-     * @param  string  $table
-     * @param  string  $foreignPivotKey
-     * @param  string  $relatedPivotKey
-     * @param  string  $parentKey
-     * @param  string  $relatedKey
+     * @param  string|null  $table
+     * @param  string|null  $foreignPivotKey
+     * @param  string|null  $relatedPivotKey
+     * @param  string|null  $parentKey
+     * @param  string|null  $relatedKey
      * @param  bool  $inverse
-     * @return MorphToOne
+     * @return MorphToOne<TRelatedModel, $this>
      */
     public function morphToOne($related, $name, $table = null, $foreignPivotKey = null,
         $relatedPivotKey = null, $parentKey = null,
@@ -51,17 +53,20 @@ trait HasMorphToOne
     /**
      * Instantiate a new MorphToOne relationship.
      *
-     * @param  Builder  $query
-     * @param  Model  $parent
+     * @template TRelatedModel of Model
+     * @template TDeclaringModel of Model
+     *
+     * @param  Builder<TRelatedModel>  $query
+     * @param  TDeclaringModel  $parent
      * @param  string  $name
      * @param  string  $table
      * @param  string  $foreignPivotKey
      * @param  string  $relatedPivotKey
      * @param  string  $parentKey
      * @param  string  $relatedKey
-     * @param  string  $relationName
+     * @param  string|null  $relationName
      * @param  bool  $inverse
-     * @return MorphToOne
+     * @return MorphToOne<TRelatedModel, TDeclaringModel>
      */
     protected function newMorphToOne(Builder $query, Model $parent, $name, $table, $foreignPivotKey,
         $relatedPivotKey, $parentKey, $relatedKey,
@@ -74,14 +79,16 @@ trait HasMorphToOne
     /**
      * Define a polymorphic, inverse many-to-many relationship but one.
      *
-     * @param  string  $related
+     * @template TRelatedModel of Model
+     *
+     * @param  class-string<TRelatedModel>  $related
      * @param  string  $name
-     * @param  string  $table
-     * @param  string  $foreignPivotKey
-     * @param  string  $relatedPivotKey
-     * @param  string  $parentKey
-     * @param  string  $relatedKey
-     * @return MorphToOne
+     * @param  string|null  $table
+     * @param  string|null  $foreignPivotKey
+     * @param  string|null  $relatedPivotKey
+     * @param  string|null  $parentKey
+     * @param  string|null  $relatedKey
+     * @return MorphToOne<TRelatedModel, $this>
      */
     public function morphedByOne($related, $name, $table = null, $foreignPivotKey = null,
         $relatedPivotKey = null, $parentKey = null, $relatedKey = null)
