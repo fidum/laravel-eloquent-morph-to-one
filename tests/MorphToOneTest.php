@@ -8,15 +8,10 @@ use Fidum\EloquentMorphToOne\Tests\Models\User;
 
 class MorphToOneTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        /**
-         * @var Restaurant $restaurant
-         * @var User $user
-         * @var Image $image
-         */
         $restaurant = Restaurant::create(['name' => 'ABC Inc']);
         $user = User::create(['email' => 'user@example.com']);
         $image = Image::create(['name' => 'Image']);
@@ -31,10 +26,10 @@ class MorphToOneTest extends TestCase
         $imageTwo = Image::create(['name' => 'Another']);
         $restaurant->images()->attach($imageTwo);
 
-        $restaurantWithoutImage = Restaurant::create(['name' => 'XYZ Inc']);
+        Restaurant::create(['name' => 'XYZ Inc']);
     }
 
-    public function testEagerLoading()
+    public function test_eager_loading(): void
     {
         $restaurant = Restaurant::with('featuredImage')->first();
 
@@ -42,7 +37,7 @@ class MorphToOneTest extends TestCase
         $this->assertEquals(1, $restaurant->featuredImage->pivot->is_featured);
     }
 
-    public function testLazyLoading()
+    public function test_lazy_loading(): void
     {
         $restaurant = Restaurant::find(1);
 
@@ -50,7 +45,7 @@ class MorphToOneTest extends TestCase
         $this->assertEquals(1, $restaurant->featuredImage->pivot->is_featured);
     }
 
-    public function testWithDefault()
+    public function test_with_default(): void
     {
         $restaurant = Restaurant::find(2);
 
@@ -59,7 +54,7 @@ class MorphToOneTest extends TestCase
         $this->assertNull($restaurant->featuredImage);
     }
 
-    public function testReverseRelation()
+    public function test_reverse_relation(): void
     {
         $image = Image::first();
 

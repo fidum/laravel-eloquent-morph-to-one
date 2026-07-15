@@ -1,0 +1,31 @@
+name: Pint
+
+on:
+    push:
+        paths:
+            - '**.php'
+
+jobs:
+    pint:
+        name: pint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.5'
+                  coverage: none
+
+            - name: Cache composer dependencies
+              uses: actions/cache@v4
+              with:
+                  path: vendor
+                  key: composer-${{ hashFiles('composer.json') }}
+
+            - name: Run composer install
+              run: composer install -n --prefer-dist
+
+            - name: Run pint
+              run: vendor/bin/pint --test

@@ -1,0 +1,26 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+        - tests
+
+    level: 6
+
+    ignoreErrors:
+        # MorphToOne intentionally returns a single model where the parent
+        # MorphToMany relation returns a collection. This is the purpose of
+        # the package, so the return type can never be compatible.
+        -
+            identifier: method.childReturnType
+            message: '#getResults#'
+            path: src/MorphToOne.php
+
+        # PHPStan resolves the `static` in Model::newQuery() to the template
+        # bound (Model) instead of TRelatedModel when the receiver is a
+        # template-typed instance, so it cannot infer the declared generic
+        # return type. Laravel's own morphToMany() has the same limitation.
+        -
+            identifier: return.type
+            path: src/HasMorphToOne.php

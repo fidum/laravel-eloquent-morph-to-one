@@ -11,6 +11,7 @@ trait HasImages
 {
     use HasMorphToOne;
 
+    /** @return MorphToOne<Image, $this> */
     public function featuredImage(): MorphToOne
     {
         return $this->morphToOne(Image::class, 'imageable')
@@ -18,6 +19,7 @@ trait HasImages
             ->wherePivot('is_featured', 1);
     }
 
+    /** @return MorphToOne<Image, $this> */
     public function featuredImageWithDefault(): MorphToOne
     {
         return $this->morphToOne(Image::class, 'imageable')
@@ -26,6 +28,7 @@ trait HasImages
             ->withDefault();
     }
 
+    /** @return MorphToMany<Image, $this> */
     public function images(): MorphToMany
     {
         return $this->morphToMany(Image::class, 'imageable')
