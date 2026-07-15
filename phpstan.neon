@@ -6,7 +6,7 @@ parameters:
         - src
         - tests
 
-    level: 9
+    level: 10
 
     ignoreErrors:
         # MorphToOne intentionally returns a single model where the parent
